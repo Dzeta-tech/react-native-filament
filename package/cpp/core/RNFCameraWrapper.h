@@ -19,6 +19,7 @@ private:
   void setLensProjection(double fov, double aspect, double near, double far);
   void setProjection(double fovInDegrees, double aspect, double near, double far, std::string directionStr);
   void setOrthographicProjection(double left, double right, double bottom, double top, double near, double far);
+  std::vector<double> getViewProjectionMatrix();
   // Convenience methods
   void lookAtCameraManipulator(std::shared_ptr<ManipulatorWrapper> cameraManipulator);
 };

@@ -110,4 +110,10 @@ export interface RNFCamera extends PointerHolder {
    * @param far    distance in world units from the camera to the far plane. far != near.
    */
   setOrthographicProjection(left: number, right: number, bottom: number, top: number, near: number, far: number): void
+
+  /**
+   * Returns projection * view as a flat, column-major 4x4 matrix.
+   * Safe to call from a Filament render callback.
+   */
+  getViewProjectionMatrix(): number[]
 }
