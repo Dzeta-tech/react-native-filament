@@ -13,6 +13,15 @@ void ViewWrapper::loadHybridMethods() {
   registerHybridMethod("createBloomOptions", &ViewWrapper::createBloomOptions, this);
   registerHybridMethod("setBloomOptions", &ViewWrapper::setBloomOptions, this);
   registerHybridMethod("getBloomOptions", &ViewWrapper::getBloomOptions, this);
+  registerHybridMethod("createFogOptions", &ViewWrapper::createFogOptions, this);
+  registerHybridMethod("setFogOptions", &ViewWrapper::setFogOptions, this);
+  registerHybridMethod("getFogOptions", &ViewWrapper::getFogOptions, this);
+  registerHybridMethod("createDepthOfFieldOptions", &ViewWrapper::createDepthOfFieldOptions, this);
+  registerHybridMethod("setDepthOfFieldOptions", &ViewWrapper::setDepthOfFieldOptions, this);
+  registerHybridMethod("getDepthOfFieldOptions", &ViewWrapper::getDepthOfFieldOptions, this);
+  registerHybridMethod("createVignetteOptions", &ViewWrapper::createVignetteOptions, this);
+  registerHybridMethod("setVignetteOptions", &ViewWrapper::setVignetteOptions, this);
+  registerHybridMethod("getVignetteOptions", &ViewWrapper::getVignetteOptions, this);
   registerHybridSetter("temporalAntiAliasingOptions", &ViewWrapper::setTemporalAntiAliasingOptions, this);
   registerHybridGetter("screenSpaceRefraction", &ViewWrapper::isScreenSpaceRefractionEnabled, this);
   registerHybridSetter("screenSpaceRefraction", &ViewWrapper::setScreenSpaceRefractionEnabled, this);
@@ -91,6 +100,57 @@ void ViewWrapper::setBloomOptions(std::shared_ptr<BloomOptionsWrapper> options) 
 
 std::shared_ptr<BloomOptionsWrapper> ViewWrapper::getBloomOptions() {
   return std::make_shared<BloomOptionsWrapper>(pointee()->getBloomOptions());
+}
+
+std::shared_ptr<FogOptionsWrapper> ViewWrapper::createFogOptions() {
+  return std::make_shared<FogOptionsWrapper>();
+}
+
+void ViewWrapper::setFogOptions(std::shared_ptr<FogOptionsWrapper> options) {
+  if (!options) {
+    [[unlikely]];
+    throw std::invalid_argument("FogOptions is null");
+  }
+  std::unique_lock lock(_mutex);
+  pointee()->setFogOptions(*options.get());
+}
+
+std::shared_ptr<FogOptionsWrapper> ViewWrapper::getFogOptions() {
+  return std::make_shared<FogOptionsWrapper>(pointee()->getFogOptions());
+}
+
+std::shared_ptr<DepthOfFieldOptionsWrapper> ViewWrapper::createDepthOfFieldOptions() {
+  return std::make_shared<DepthOfFieldOptionsWrapper>();
+}
+
+void ViewWrapper::setDepthOfFieldOptions(std::shared_ptr<DepthOfFieldOptionsWrapper> options) {
+  if (!options) {
+    [[unlikely]];
+    throw std::invalid_argument("DepthOfFieldOptions is null");
+  }
+  std::unique_lock lock(_mutex);
+  pointee()->setDepthOfFieldOptions(*options.get());
+}
+
+std::shared_ptr<DepthOfFieldOptionsWrapper> ViewWrapper::getDepthOfFieldOptions() {
+  return std::make_shared<DepthOfFieldOptionsWrapper>(pointee()->getDepthOfFieldOptions());
+}
+
+std::shared_ptr<VignetteOptionsWrapper> ViewWrapper::createVignetteOptions() {
+  return std::make_shared<VignetteOptionsWrapper>();
+}
+
+void ViewWrapper::setVignetteOptions(std::shared_ptr<VignetteOptionsWrapper> options) {
+  if (!options) {
+    [[unlikely]];
+    throw std::invalid_argument("VignetteOptions is null");
+  }
+  std::unique_lock lock(_mutex);
+  pointee()->setVignetteOptions(*options.get());
+}
+
+std::shared_ptr<VignetteOptionsWrapper> ViewWrapper::getVignetteOptions() {
+  return std::make_shared<VignetteOptionsWrapper>(pointee()->getVignetteOptions());
 }
 
 void ViewWrapper::setTemporalAntiAliasingOptions(std::unordered_map<std::string, double> options) {

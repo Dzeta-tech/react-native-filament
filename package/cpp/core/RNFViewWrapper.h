@@ -4,10 +4,13 @@
 #include "RNFAntiAliasingEnum.h"
 #include "RNFBloomOptionsWrapper.h"
 #include "RNFCameraWrapper.h"
+#include "RNFDepthOfFieldOptionsWrapper.h"
 #include "RNFDitheringEnum.h"
 #include "RNFDynamicResolutionOptions.h"
+#include "RNFFogOptionsWrapper.h"
 #include "RNFQualityLevel.h"
 #include "RNFSceneWrapper.h"
+#include "RNFVignetteOptionsWrapper.h"
 #include "jsi/RNFPointerHolder.h"
 
 #include <filament/View.h>
@@ -51,6 +54,15 @@ private:
   std::shared_ptr<BloomOptionsWrapper> createBloomOptions();
   void setBloomOptions(std::shared_ptr<BloomOptionsWrapper> options);
   std::shared_ptr<BloomOptionsWrapper> getBloomOptions();
+  std::shared_ptr<FogOptionsWrapper> createFogOptions();
+  void setFogOptions(std::shared_ptr<FogOptionsWrapper> options);
+  std::shared_ptr<FogOptionsWrapper> getFogOptions();
+  std::shared_ptr<DepthOfFieldOptionsWrapper> createDepthOfFieldOptions();
+  void setDepthOfFieldOptions(std::shared_ptr<DepthOfFieldOptionsWrapper> options);
+  std::shared_ptr<DepthOfFieldOptionsWrapper> getDepthOfFieldOptions();
+  std::shared_ptr<VignetteOptionsWrapper> createVignetteOptions();
+  void setVignetteOptions(std::shared_ptr<VignetteOptionsWrapper> options);
+  std::shared_ptr<VignetteOptionsWrapper> getVignetteOptions();
 
 private:
   std::mutex _mutex;

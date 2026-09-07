@@ -264,6 +264,69 @@ export interface BloomOptions {
   haloThreshold?: number
 }
 
+/** Options for large-scale fog in the scene. */
+export interface FogOptions {
+  /** Distance in world units from the camera where fog starts. */
+  distance?: number
+  /** Distance after which fog calculation is disabled. */
+  cutOffDistance?: number
+  /** Maximum fog opacity in the [0, 1] range. */
+  maximumOpacity?: number
+  /** Fog floor in world units. */
+  height?: number
+  /** How quickly fog dissipates with altitude. */
+  heightFalloff?: number
+  /** Linear RGB fog color. */
+  color?: [red: number, green: number, blue: number]
+  /** Extinction factor at the fog floor. */
+  density?: number
+  /** Distance where sun in-scattering starts. */
+  inScatteringStart?: number
+  /** Size of sun in-scattering; positive values enable it. */
+  inScatteringSize?: number
+  /** Sample the fog color from the IBL and tint it with `color`. */
+  fogColorFromIbl?: boolean
+  /** Enable or disable large-scale fog. */
+  enabled?: boolean
+}
+
+/** Options for the depth-of-field post-processing effect. */
+export interface DepthOfFieldOptions {
+  /** Circle-of-confusion scale factor. */
+  cocScale?: number
+  /** Width/height aspect ratio of the circle of confusion. */
+  cocAspectRatio?: number
+  /** Maximum aperture diameter in meters. */
+  maxApertureDiameter?: number
+  /** Enable or disable depth of field. */
+  enabled?: boolean
+  /** Gap-filling filter used by the gather kernel. */
+  filter?: 'NONE' | 'UNUSED' | 'MEDIAN'
+  /** Process depth of field at native resolution. */
+  nativeResolution?: boolean
+  foregroundRingCount?: number
+  backgroundRingCount?: number
+  fastGatherRingCount?: number
+  /** Maximum foreground circle of confusion in pixels. */
+  maxForegroundCOC?: number
+  /** Maximum background circle of confusion in pixels. */
+  maxBackgroundCOC?: number
+}
+
+/** Options for the vignette post-processing effect. */
+export interface VignetteOptions {
+  /** Higher values restrict the effect closer to the corners. */
+  midPoint?: number
+  /** Shape from rounded rectangle (0) to circle (1). */
+  roundness?: number
+  /** Softening amount in the [0, 1] range. */
+  feather?: number
+  /** Linear RGBA vignette color. Alpha is currently ignored by Filament. */
+  color?: [red: number, green: number, blue: number, alpha: number]
+  /** Enable or disable the vignette effect. */
+  enabled?: boolean
+}
+
 type Entries<T, K extends keyof T = keyof T> = (K extends unknown ? [K, T[K]] : never)[]
 const getEntries = <T extends object>(obj: T) => Object.entries(obj) as unknown as Entries<T>
 
